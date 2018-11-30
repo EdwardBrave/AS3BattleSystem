@@ -133,5 +133,16 @@ package hlp {
                 _nextItem.removeNode(key);
             }
         }
+
+        /**
+         * Clear and remove all nodes in current list
+         */
+        public function clear():void{
+            _items.splice(0, _items.length);
+            if(_nextItem) {
+                _nextItem.clear();
+            }
+            _nextItem = null;
+        }
     }
 }
