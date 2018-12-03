@@ -5,5 +5,12 @@ package enixan.battleSystemCore {
      * */
     public interface IComponent {
 
+        function toString():String;
+
+        function get container():Container;
+
+        function set container(parent:Container):void;
+
+        function destruct():void;
     }
 }
