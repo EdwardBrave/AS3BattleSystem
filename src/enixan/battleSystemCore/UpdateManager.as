@@ -78,8 +78,7 @@ import hlp.List;
         private static function _onProcessesUpdate(process:Object):void {
             if (!(process is Process))
                 return;
-            trace("work with processes");
-
+            (process as Process).update();
         }
 
         /**
