@@ -104,6 +104,21 @@ package hlp {
         }
 
         /**
+         *  Search vector of objects by given key of node
+         *  @param key Index of vector in current list
+         *  @return Vector of objects or null if it doesn't exist
+         * */
+        public function getVector(key:uint):Vector.<Object> {
+            if (key == _key) {
+                return _items;
+            } else if (_nextItem) {
+                return _nextItem.getVector(key);
+            }
+            return null;
+
+        }
+
+        /**
          *  Search and remove given object in the first found node that contains it.
          *  if vector of node become empty then this node will be removed
          *  @param value Object that will be deleted from the vector
