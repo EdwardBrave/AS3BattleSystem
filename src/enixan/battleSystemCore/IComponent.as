@@ -19,7 +19,7 @@ package enixan.battleSystemCore {
 
         /**
          * Must take a pointer on parent **Container** and initialize methods and params associated with it
-         * @return pointer on parent **Container**
+         * @param parent Pointer on parent **Container**
          * */
         function set container(parent:Container):void;
 

@@ -72,7 +72,6 @@ package enixan.battleSystemCore {
          * @param settings Values that allows to **Entity** entity logic
          * */
         public function Entity(settings:Object = null) {
-            super();
             container = null;
             _settings = {};
             if (settings) {
@@ -86,11 +85,7 @@ package enixan.battleSystemCore {
          * @param settings Values that allows to customise **Entity** logic
          * */
         public function init(settings:Object):void {
-            if (settings) {
-                for (var val:String in settings) {
-                    _settings[val] = settings[val];
-                }
-            }
+            refreshSettings(settings);
         }
 
         /**
