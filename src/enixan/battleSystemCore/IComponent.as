@@ -24,7 +24,7 @@ package enixan.battleSystemCore {
         function set container(parent:Container):void;
 
         /**
-         * Must give the name of **Component** for *Behaviour* logic
+         * Must give the name of **Component** for *BehaviourManager* logic
          * @return name on **Component**
          * */
         function toString():String;
@@ -33,7 +33,7 @@ package enixan.battleSystemCore {
          * Must take the settings and initialize component with them
          * @param settings Values that allows to customise component logic
          * */
-        function init(settings:Object):void
+        function init(settings:Object):void;
 
         /**
          * Function that reacts on start battle event

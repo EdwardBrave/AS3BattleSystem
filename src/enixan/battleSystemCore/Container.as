@@ -7,7 +7,7 @@ package enixan.battleSystemCore {
     public class Container extends EventDispatcher {
 
         /** Vector of components that contains in current container*/
-        private var _components:Vector.<IComponent>;
+        protected var _components:Vector.<IComponent>;
 
         /**
          * Constructor of container that can manage and store logical components
@@ -113,6 +113,7 @@ package enixan.battleSystemCore {
 
         /**
          * Destructor. Remove all components, addiction variables and it self
+         * **CAUTION!** After this action the **Container** will be dead and unusable
          * */
         public function destruct():void {
             clear();

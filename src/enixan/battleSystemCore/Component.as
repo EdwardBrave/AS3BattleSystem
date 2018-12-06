@@ -1,13 +1,14 @@
 package enixan.battleSystemCore {
+        import flash.utils.getQualifiedClassName;
 
     /**
-     *  Base class for logic what is contain only one behaviour
+     *  Base class of logic that is contain only one behaviour
      * */
     public class Component implements IComponent {
 
         private var _process:Process;
 
-        private var _container:Container;
+        protected var _container:Container;
 
         public function get process():Process {
             return _process;
@@ -19,16 +20,18 @@ package enixan.battleSystemCore {
 
         public function set container(parent:Container):void {
             _container = parent;
-
         }
 
 
-        public function Component() {
-            _process = new Process(0);
+        public function Component(priority:uint = int.MAX_VALUE) {
+            _process = new Process(priority);
         }
+
 
         public function toString():String {
-            return "Component";
+            var className:String = getQualifiedClassName(this);
+            className = className.substr(className.lastIndexOf(":")+1);
+            return className;
         }
 
         public function init(settings:Object):void {
@@ -46,7 +49,6 @@ package enixan.battleSystemCore {
         public function update():void {
 
         }
-
 
 
         public function destruct():void {

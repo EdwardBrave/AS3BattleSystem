@@ -12,6 +12,9 @@ import hlp.List;
         /** Vector of functions that reacts on **tween update** */
         public static var onUpdateList:Vector.<Function> = new Vector.<Function>();
 
+        /** Vector of functions that reacts on **battle update** */
+        public static var onStartList:Vector.<Function> = new Vector.<Function>();
+
         /** Sorted list of priority processes that reacts on **tween update** */
         public static var processList:List = new List();
 
@@ -59,6 +62,16 @@ import hlp.List;
             }
             _timeData.time = _timeData.prevTime = 0.0;
             _tween = TweenLite.to( _timeData, int.MAX_VALUE,{time: int.MAX_VALUE, onUpdate: _onUpdate} );
+        }
+
+        /**
+         * Reinitialize tween *(for start real battle session)* and dispatch the start battle event
+         * */
+        public static function startBattle():void {
+            initUpdate();
+            for each(var func:Function in onStartList){
+                func.call();
+            }
         }
 
         /**
