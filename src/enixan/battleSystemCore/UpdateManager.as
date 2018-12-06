@@ -19,7 +19,7 @@ import hlp.List;
         public static var processList:List = new List();
 
         /** TweenLite object allows to manage battle session and generate events *(updates)**/
-        public static var _tween:TweenLite;
+        private static var _tween:TweenLite;
 
         /** Gives some interface for control current battle session */
         public static function get tween():TweenLite {
@@ -100,6 +100,7 @@ import hlp.List;
         public static function clear():void {
             tween.kill();
             onUpdateList.splice(0,onUpdateList.length);
+            onStartList.splice(0,onStartList.length);
             processList.clear();
             System.gc();
         }

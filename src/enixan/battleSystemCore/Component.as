@@ -7,7 +7,7 @@ package enixan.battleSystemCore {
     public class Component implements IComponent {
 
         /**The pointer on the **Process***/
-        private var _process:Process;
+        protected var _process:Process;
 
         /**Pointer on parent container*/
         protected var _container:Container;
