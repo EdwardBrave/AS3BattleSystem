@@ -21,7 +21,7 @@ package hlp {
          *  @param value Object that will be put in the vector. if its **null** then vector will be empty
          * */
         public function List(key:uint = 0, value:Object = null) {
-            _key = key;
+            _key = key; 
             _items = new Vector.<Object>();
             if (value) {
                 _items.push(value);
