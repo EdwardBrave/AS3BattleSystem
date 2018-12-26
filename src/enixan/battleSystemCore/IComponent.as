@@ -33,7 +33,7 @@ package enixan.battleSystemCore {
          * Must take the settings and initialize component with them
          * @param settings Values that allows to customise component logic
          * */
-        function init(settings:Object):void;
+        function init(settings:Object = null):void;
 
         /**
          * Function that reacts on start battle event
