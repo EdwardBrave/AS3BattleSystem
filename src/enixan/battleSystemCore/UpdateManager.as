@@ -7,7 +7,7 @@ import hlp.List;
     /**
      * Global static class that control`s updates and manage active processes in game session
      * */
-    public class UpdateManager {
+    public class UpdateManager { 
 
         /** Vector of functions that reacts on **tween update** */
         public static var onUpdateList:Vector.<Function> = new Vector.<Function>();
