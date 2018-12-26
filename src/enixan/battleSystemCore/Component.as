@@ -67,7 +67,7 @@ package enixan.battleSystemCore {
          * *You should override this function for use*
          * @param settings Values that allows to customise component logic
          * */
-        public function init(settings:Object):void {
+        public function init(settings:Object = null):void {
             refreshSettings(settings);
         }
 

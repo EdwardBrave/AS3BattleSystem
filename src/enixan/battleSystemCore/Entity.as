@@ -6,7 +6,7 @@ package enixan.battleSystemCore {
     public class Entity extends Container implements IComponent {
 
         /**Pointer on **BehaviourManager** that control components behaviour in current environment*/
-        protected var _behaviourManager:IBehaviourManager;
+        private var _behaviourManager:IBehaviourManager;
 
         /**Pointer on parent container*/
         private var _container:Container;
@@ -23,7 +23,13 @@ package enixan.battleSystemCore {
                 _behaviourManager.destruct();
             }
             _behaviourManager = newManager;
-            _behaviourManager.container = this;
+            if (_behaviourManager)
+                _behaviourManager.container = this;
+        }
+
+        /**Public pointer on **BehaviourManager** that control components behaviour in current environment*/
+        public function get behaviourManager():IBehaviourManager {
+            return _behaviourManager;
         }
 
         /**
@@ -84,7 +90,7 @@ package enixan.battleSystemCore {
          * *NOTE! It is an interface for managing Entity and will be better if it never be used*
          * @param settings Values that allows to customise **Entity** logic
          * */
-        public function init(settings:Object):void {
+        public function init(settings:Object = null):void {
             refreshSettings(settings);
         }
 

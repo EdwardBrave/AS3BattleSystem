@@ -23,7 +23,7 @@ package enixan.battleSystemCore {
          * @return pointer on self *(always)*
          * */
         public function addComponent(component:IComponent, index:int = -1):Container {
-            if (_components.indexOf(component) == -1) {
+            if (_components.indexOf(component) == -1 && component != null) {
                 index = (index < 0 || index >_components.length) ? _components.length : index;
                 component.container = this;
                 _components.insertAt(index, component);
