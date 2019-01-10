@@ -38,6 +38,8 @@ package enixan.battleSystemCore {
         /** allows to check the NULL value of the _status*/
         private var _isChanged:Boolean;
 
+        public var settings:Object;
+
         /**
          * gives current status of the Event
          * @return (int) status (STATUS_SUCCESS / STATUS_RUNNING / STATUS_FAILURE)
@@ -72,12 +74,14 @@ package enixan.battleSystemCore {
          * @param bubbles go to parent for details
          * @param cancelable go to parent for details
          * @param rule type of rule of statuses values collection
+         * @param settings additional information that can be add to event
          * */
-        public function NodeStatusEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false, rule:String = RULE_DISJUNCTION) {
+        public function NodeStatusEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false, rule:String = RULE_DISJUNCTION, settings:Object = null) {
             super(type,bubbles,cancelable);
             _rule = rule;
             _isChanged = false;
             _status = STATUS_FAILURE;
+            this.settings = settings;
         }
     }
 }
