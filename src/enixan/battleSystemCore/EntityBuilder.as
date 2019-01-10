@@ -36,7 +36,7 @@ package enixan.battleSystemCore {
                 }
                 if (component is Entity && buildData.behaviourClassName) {
                     var behaviourManager:IBehaviourManager;
-                    assetClass = AssetsList.getClassByName(buildData.behaviourClassName);
+                    assetClass = AssetsList.getClassByName("behaviour."+buildData.behaviourClassName);
                     try {
                         behaviourManager = new assetClass();
                     }
