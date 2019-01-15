@@ -9,11 +9,16 @@ package enixan.battleSystemCore {
 
     //USING_STATUSES____________________________________________________________________________________________________
         /**using as status value*/
-        public static const STATUS_SUCCESS:int = 1;
+        public static const STATUS_SUCCESS:String = "statusSuccess";
         /**using as status value*/
-        public static const STATUS_RUNNING:int = 0;
+        public static const STATUS_RUNNING:String = "statusRunning";
+        /**using as status value. Allows to check the NULL value of the _status*/
+        public static const STATUS_UNDEFINED:String = "statusUndefined";
         /**using as status value*/
-        public static const STATUS_FAILURE:int = -1;
+        public static const STATUS_FAILURE:String = "statusFailure";
+        /**Default node's status value. Allows to check unused nodes of *BehaviourTree*. */
+        public static const STATUS_UNUSED:String = "statusUnused";
+
     //END_USING_STATUSES------------------------------------------------------------------------------------------------
 
     //USING_RULES_______________________________________________________________________________________________________
@@ -33,10 +38,9 @@ package enixan.battleSystemCore {
         private var _rule:String;
 
         /** storing status of current event*/
-        private var _status:int;
+        private var _status:String;
 
-        /** allows to check the NULL value of the _status*/
-        private var _isChanged:Boolean;
+
 
         public var settings:Object;
 
@@ -44,8 +48,8 @@ package enixan.battleSystemCore {
          * gives current status of the Event
          * @return (int) status (STATUS_SUCCESS / STATUS_RUNNING / STATUS_FAILURE)
          * */
-        public function get status():int {
-            if(!_isChanged) {
+        public function get status():String {
+            if(_status == STATUS_UNDEFINED) {
                 trace("#>>enixan.battleSystemCore.NodeStatusEvent::set_status:57");
                 trace("#>>EventWarning! Status wasn't changed in any listener by this moment.");
             }
@@ -56,10 +60,9 @@ package enixan.battleSystemCore {
          * Collect new status according defined rules
          * @param value given status that will be collected
          * */
-        public function set status(value:int):void {
-            if (!_isChanged) {
+        public function set status(value:String):void {
+            if (_status == STATUS_UNDEFINED) {
                 _status = value;
-                _isChanged = true;
             }else if(value == STATUS_RUNNING) {
                 _status = STATUS_RUNNING;
             }else if(_status != STATUS_RUNNING && (_rule == RULE_CONJUNCTION) == (_status == STATUS_SUCCESS)) {
@@ -76,11 +79,10 @@ package enixan.battleSystemCore {
          * @param rule type of rule of statuses values collection
          * @param settings additional information that can be add to event
          * */
-        public function NodeStatusEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false, rule:String = RULE_DISJUNCTION, settings:Object = null) {
+        public function NodeStatusEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false, settings:Object = null, rule:String = RULE_DISJUNCTION) {
             super(type,bubbles,cancelable);
             _rule = rule;
-            _isChanged = false;
-            _status = STATUS_FAILURE;
+            _status = STATUS_UNDEFINED;
             this.settings = settings;
         }
     }
