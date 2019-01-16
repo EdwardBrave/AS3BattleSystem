@@ -17,6 +17,8 @@ package enixan.battleSystemCore {
      *  **Handlers** is a methods of current class that can execute different node types and move on the tree in this way.
      *  All handlers divides on 3 basic archetypes by it functionality:
      * **Composite** - This nodes contain sub-nodes and use logic that can manage branches to continue behaviour logic.
+     * Only this nodes can react on BTNodeVO.forceRunning which allows to ignore queue of sub-nodes
+     * and start from node with status STATUS_RUNNING if it exist;
      * handlers names: *sequence, selector, condition, randomSelector, random*
      * **Decorator** - It can manage only *ONE* sub-node: change returned status and control it execution.
      * handlers names: *inverter, successor*
