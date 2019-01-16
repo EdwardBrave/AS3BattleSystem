@@ -1,11 +1,10 @@
 package enixan.battleSystemCore {
-    import flash.events.Event;
 
     /**
      * Class store a *status* of current event that can be used after dispatch
      * This functionality using in the **Behaviour Tree** pattern
      * */
-    public class NodeStatusEvent extends Event{
+    public class NodeStatusEvent extends ObjDataEvent{
 
     //USING_STATUSES____________________________________________________________________________________________________
         /**using as status value*/
@@ -40,10 +39,6 @@ package enixan.battleSystemCore {
         /** storing status of current event*/
         private var _status:String;
 
-
-
-        public var settings:Object;
-
         /**
          * gives current status of the Event
          * @return (int) status (STATUS_SUCCESS / STATUS_RUNNING / STATUS_FAILURE)
@@ -73,17 +68,16 @@ package enixan.battleSystemCore {
         /**
          * Class store a *status* of current event that can be used after dispatch
          * This functionality using in the **Behaviour Tree** pattern
-         * @param type go to parent for details
+         * @param _type go to parent for details
          * @param bubbles go to parent for details
          * @param cancelable go to parent for details
+         * @param data additional information that can be add to event
          * @param rule type of rule of statuses values collection
-         * @param settings additional information that can be add to event
          * */
-        public function NodeStatusEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false, settings:Object = null, rule:String = RULE_DISJUNCTION) {
-            super(type,bubbles,cancelable);
+        public function NodeStatusEvent(_type:String, bubbles:Boolean = false, cancelable:Boolean = false, data:Object = null, rule:String = RULE_DISJUNCTION) {
+            super(_type, bubbles, cancelable, data);
             _rule = rule;
             _status = STATUS_UNDEFINED;
-            this.settings = settings;
         }
     }
 }

@@ -27,11 +27,17 @@ package enixan.battleSystemCore {
      * */
     public class BehaviourTree implements IBehaviourManager {
 
+        /**It is an Event that allows to launch rootTreeUpdate at next update in any case*/
+        public static const FORCE_UPDATE:String = "treeForceUpdate";
+
         /**
          * List of all defined handlers of node. It is a methods of current class that can execute
          * different node types and move on the tree in this way. (read class info for more...)
          * */
         protected static const handlers:Vector.<String> = new <String>['sequence','selector','condition','randomSelector','random','inverter','successor','leaf'];
+
+        /**Property allows to launch rootTreeUpdate at next update in any case*/
+        private var forceUpdate:Boolean;
 
         /** Count an iterations for adding it in nodes in runtime. Helps in debug*/
         private var iterationsCounter:uint;
@@ -39,7 +45,12 @@ package enixan.battleSystemCore {
         /**Contain all nodes of **BehaviourTree** that executes every *rootTreeUpdate**/
         public var tree:BTNodeVO;
 
-        /**Object of settings for customisation of work logic*/
+        /**
+         * Object of settings for customisation of work logic.
+         * parameters:
+         * .**behaviourUpdateCount** (int) - it is need count of the standard updates to launch rootTreeUpdate.
+         * If it is *null* rootTreeUpdate will be launching every update.
+         * */
         protected var _settings:Object;
 
 
@@ -59,7 +70,16 @@ package enixan.battleSystemCore {
          * @param parent Pointer on parent **Container**
          * */
         public function set container(parent:Entity):void {
+            if(_container == parent) {
+                return;
+            }
+            if(_container) {
+                _container.removeEventListener(FORCE_UPDATE, onForceUpdate);
+            }
             _container = parent;
+            if(_container) {
+                _container.addEventListener(FORCE_UPDATE, onForceUpdate);
+            }
         }
 
         /**
@@ -71,6 +91,7 @@ package enixan.battleSystemCore {
             iterationsCounter = 0;
             this.tree = data.tree;
             _settings = {};
+            forceUpdate = true;
             refreshSettings(data.settings);
         }
 
@@ -100,11 +121,18 @@ package enixan.battleSystemCore {
          * *You should override this function for use*
          * */
         public function update():void {
-            if (!_settings.hasOwnProperty("behaviourUpdateCount") || _settings.behaviourUpdateCount >= _settings._updateCounter++) {
+            if (forceUpdate || !_settings.hasOwnProperty("behaviourUpdateCount") || _settings.behaviourUpdateCount <= _settings._updateCounter++) {
                 rootTreeUpdate();
                 _settings._updateCounter = 0;
             }
 
+        }
+
+        /**
+         *  Function react on BehaviourTree.FORCE_UPDATE event and allow forceUpdate at next iteration
+         * */
+        private function onForceUpdate(e:*):void {
+            forceUpdate = true;
         }
 
         /**
@@ -144,6 +172,7 @@ package enixan.battleSystemCore {
                 trace("#>>BTWarning! Entity is still undefined! Behaviour can not be dispatched.");
                 return;
             }
+            forceUpdate = false;
             iterationsCounter++;
             var status:String = node(tree);
             if (status == NodeStatusEvent.STATUS_FAILURE || status == NodeStatusEvent.STATUS_UNDEFINED) {
