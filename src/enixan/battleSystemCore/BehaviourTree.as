@@ -151,7 +151,8 @@ package enixan.battleSystemCore {
          * @param status needed status for search
          * @return position node with needed status in node.nodes vector (-1 if it doesn't exist)
          * */
-        private function getStatusPos(node:BTNodeVO, status:String = NodeStatusEvent.STATUS_RUNNING):int {
+        private function getStatusPos(node:BTNodeVO, status:String = ""):int {
+            status = (status) ? status: NodeStatusEvent.STATUS_RUNNING;
             if (node.forceRunning) {
                 var nodes:Vector.<BTNodeVO> = node.nodes;
                 for (var i:int = nodes.length-1; i >= 0; i--) {
