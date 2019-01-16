@@ -176,7 +176,7 @@ package enixan.battleSystemCore {
             iterationsCounter++;
             var status:String = node(tree);
             if (status == NodeStatusEvent.STATUS_FAILURE || status == NodeStatusEvent.STATUS_UNDEFINED) {
-                trace("#>>enixan.battleSystemCore.BehaviourTree::rootTreeUpdate:146");
+                trace("#>>enixan.battleSystemCore.BehaviourTree::rootTreeUpdate:177");
                 trace("#>>BTWarning! Behaviour is undefined (STATUS_FAILURE)!");
             }
         }
@@ -192,7 +192,7 @@ package enixan.battleSystemCore {
                 data.iteration = iterationsCounter;
             }
             if (data.status == NodeStatusEvent.STATUS_UNDEFINED) {
-                trace("#>>enixan.battleSystemCore.BehaviourTree::node:160");
+                trace("#>>enixan.battleSystemCore.BehaviourTree::node:191");
                 trace("#>>BTError! Node does not give an answer on event (STATUS_UNDEFINED)!");
             }
             return data.status;
