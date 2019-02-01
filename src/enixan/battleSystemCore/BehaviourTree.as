@@ -21,7 +21,7 @@ package enixan.battleSystemCore {
      * and start from node with status STATUS_RUNNING if it exist;
      * handlers names: *sequence, selector, condition, randomSelector, random*
      * **Decorator** - It can manage only *ONE* sub-node: change returned status and control it execution.
-     * handlers names: *inverter, successor*
+     * handlers names: *repeater, inverter, successor*
      * **Leaf**      - It doesnt have a sub notes but only this node can contain an executing functionality.
      * handlers names: *leaf*
      * */
@@ -34,7 +34,7 @@ package enixan.battleSystemCore {
          * List of all defined handlers of node. It is a methods of current class that can execute
          * different node types and move on the tree in this way. (read class info for more...)
          * */
-        protected static const handlers:Vector.<String> = new <String>['sequence','selector','condition','randomSelector','random','inverter','successor','leaf'];
+        protected static const handlers:Vector.<String> = new <String>['sequence','selector','condition','randomSelector','random','repeater','inverter','successor','leaf'];
 
         /**Property allows to launch rootTreeUpdate at next update in any case*/
         private var forceUpdate:Boolean;
@@ -312,6 +312,35 @@ package enixan.battleSystemCore {
                 return node(data.nodes[pos]);
             }
             return NodeStatusEvent.STATUS_UNDEFINED;
+        }
+
+        /**
+         * Repeat a sub-node **data.settings.repeatCount** times
+         * (repeat only if status is STATUS_SUCCESS or STATUS_RUNNING.
+         * In other cases returns sub-node status without changes)
+         * Iteration counter storing at **data.settings._rCounter** (count of iterations left)
+         * Note: If status is status running then current iteration will not be counted
+         * @param data given node that will be repeated
+         * @return status of current iteration
+         * */
+        private function repeater(data:BTNodeVO):String {
+            var status:String = NodeStatusEvent.STATUS_UNDEFINED;
+            if (data.settings && data.nodes && data.nodes.length >= 1) {
+                data.settings._rCounter = data.settings._rCounter || data.settings.repeatCount;
+                var counter:int = data.settings._rCounter;
+                for(;counter > 0;counter--) {
+                    status = node(data.nodes[0]);
+                    if (status != NodeStatusEvent.STATUS_SUCCESS) {
+                        break;
+                    }
+                }
+                if (status != NodeStatusEvent.STATUS_RUNNING) {
+                    data.settings._rCounter = 0;
+                } else {
+                    data.settings._rCounter = counter;
+                }
+            }
+            return status;
         }
 
         /**
