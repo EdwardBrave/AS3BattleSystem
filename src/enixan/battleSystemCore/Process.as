@@ -18,6 +18,8 @@ package enixan.battleSystemCore {
         public static const UPDATE:uint = 4;
         /**Event for the process event dispatcher*/
         public static const COMPLETE:uint = 5;
+        /**Event for the process event dispatcher*/
+        public static const CLEAR:uint = 6;
 
         /**
          * Vector of functions-listeners that react on events
@@ -50,6 +52,14 @@ package enixan.battleSystemCore {
         }
 
         /**
+         * Check status of process
+         * return **true** if process is never used or  in global update queue
+         * */
+        public function get isClear():Boolean {
+            return _length <= 0;
+        }
+
+        /**
          * Check current activity of process
          * return **true** if process is contains in global update queue
          * */
@@ -66,7 +76,7 @@ package enixan.battleSystemCore {
          * return **true** if process finished
          * */
         public function get isFinished():Boolean {
-            return _elapsedTime >= _length;
+            return _elapsedTime >= _length && _length > 0;
         }
 
         /**
@@ -87,7 +97,7 @@ package enixan.battleSystemCore {
          * */
         public function Process(priority:uint) {
             _priority = priority;
-            listeners = new Vector.<Function>(6,true);
+            listeners = new Vector.<Function>(7,true);
         }
 
         /**
@@ -109,6 +119,10 @@ package enixan.battleSystemCore {
             var currentProgress:Number = progress;
             _length = (length < 0)? _length : length;
             _elapsedTime = ((newProgress < 0) ? currentProgress: newProgress) * _length;
+            if (_length <= 0) {
+                clear();
+                return;
+            }
             UpdateManager.processList.push(_priority, this);
             dispatchEvent(START);
         }
@@ -126,12 +140,11 @@ package enixan.battleSystemCore {
          * */
         internal function update():void {
             _elapsedTime += deltaProcTime;
+            dispatchEvent(UPDATE);
             if(isFinished) {
                 UpdateManager.processList.removeItemAt(_priority, this);
                 dispatchEvent(COMPLETE);
-                return;
             }
-            dispatchEvent(UPDATE);
         }
 
         /**
@@ -144,6 +157,16 @@ package enixan.battleSystemCore {
             _length = (length < 0)? _length : length;
             _elapsedTime = ((newProgress < 0) ? currentProgress: newProgress) * _length;
             dispatchEvent(RESET);
+        }
+
+        /**
+         * Return all process data to defaults *(stops current process)*
+         * */
+        public function clear():void {
+            UpdateManager.processList.removeItemAt(_priority, this);
+            _length = 0;
+            _elapsedTime = 0;
+            dispatchEvent(CLEAR);
         }
 
         /**
