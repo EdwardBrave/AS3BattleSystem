@@ -1,10 +1,10 @@
 package enixan.battleSystemCore {
-    import flash.events.EventDispatcher;
+    import flash.display.Sprite;
 
     /**
      * Contains, manage and store logical components of entity
      * */
-    public class Container extends EventDispatcher {
+    public class Container extends Sprite {
 
         /** Vector of components that contains in current container*/
         protected var _components:Vector.<IComponent>;

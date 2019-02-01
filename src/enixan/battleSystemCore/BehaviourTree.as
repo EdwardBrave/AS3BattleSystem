@@ -133,6 +133,9 @@ package enixan.battleSystemCore {
          * */
         private function onForceUpdate(e:*):void {
             forceUpdate = true;
+            if(e is NodeStatusEvent) {
+                (e as NodeStatusEvent).status = NodeStatusEvent.STATUS_SUCCESS;
+            }
         }
 
         /**
@@ -177,8 +180,8 @@ package enixan.battleSystemCore {
             iterationsCounter++;
             var status:String = node(tree);
             if (status == NodeStatusEvent.STATUS_FAILURE || status == NodeStatusEvent.STATUS_UNDEFINED) {
-                trace("#>>enixan.battleSystemCore.BehaviourTree::rootTreeUpdate:177");
-                trace("#>>BTWarning! Behaviour is undefined (STATUS_FAILURE)!");
+                trace("#>>enixan.battleSystemCore.BehaviourTree::rootTreeUpdate:181");
+                trace("#>>BTWarning! Behaviour is undefined (STATUS_FAILURE or STATUS_UNDEFINED)!");
             }
         }
 
@@ -352,6 +355,8 @@ package enixan.battleSystemCore {
          * @return status of execution
          * */
         private function leaf(data:BTNodeVO):String {
+            if (!data.eventType)
+                return NodeStatusEvent.STATUS_UNDEFINED;
             var statusEvent:NodeStatusEvent = new NodeStatusEvent(data.eventType, false, false, data.settings);
             _container.dispatchEvent(statusEvent);
             return statusEvent.status;

@@ -43,11 +43,22 @@ package enixan.battleSystemCore {
         }
 
         /**
+         * Give the elapsed time of current process
+         * */
+        public function get elapsedTime():Number {
+            return _elapsedTime;
+        }
+
+        /**
          * Check current activity of process
          * return **true** if process is contains in global update queue
          * */
         public function get isActive():Boolean {
-            return UpdateManager.processList.getVector(_priority).indexOf(this) != -1;
+            var vector:Vector.<Object> = UpdateManager.processList.getVector(_priority);
+            if(vector) {
+                return  vector.indexOf(this) != -1;
+            }
+            return false;
         }
 
         /**
@@ -114,12 +125,12 @@ package enixan.battleSystemCore {
          * Internal update function that reacts on global update event
          * */
         internal function update():void {
+            _elapsedTime += deltaProcTime;
             if(isFinished) {
                 UpdateManager.processList.removeItemAt(_priority, this);
                 dispatchEvent(COMPLETE);
                 return;
             }
-            _elapsedTime += deltaProcTime;
             dispatchEvent(UPDATE);
         }
 
