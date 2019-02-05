@@ -1,5 +1,6 @@
 package enixan.battleAssets {
-    import enixan.battleSystemCore.Component;
+import enixan.battleSystemCore.BehaviourTree;
+import enixan.battleSystemCore.Component;
     import enixan.battleSystemCore.Entity;
 
     import flash.utils.getDefinitionByName;
@@ -14,16 +15,18 @@ package enixan.battleAssets {
          * */
         public static function getClassByName(className:String):Class {
             try{
-                if (className == "Entity"){
+                if (className == "Entity") {
                     return Entity;
-                } else if(className == "Component"){
+                } else if(className == "Component") {
                     return Component;
+                } else if(className == "behaviour.BehaviourTree") {
+                    return BehaviourTree;
                 } else {
                     return getDefinitionByName("enixan.battleAssets." + className) as Class;
                 }
             }
             catch (err:Error){
-                trace("#>>enixan.battleAssets.AssetsList::getClassByName:22");
+                trace("#>>enixan.battleAssets.AssetsList::getClassByName:25");
                 trace("#>>AssetsError! Class of the given name \""+className+"\" not found.");
             }
             return null;

@@ -44,9 +44,8 @@ package enixan.battleSystemCore {
         * @param priority Value of place of the Process in global update queue
         * @param settings Values that allows to customise component logic
         * */
-        public function Component(priority:uint = int.MAX_VALUE, settings:Object = null) {
+        public function Component(settings:Object = null) {
             _settings = {};
-            _process = new Process(priority);
             if (settings) {
                 init(settings);
             }
@@ -68,6 +67,9 @@ package enixan.battleSystemCore {
          * @param settings Values that allows to customise component logic
          * */
         public function init(settings:Object = null):void {
+            if (settings && settings.processPriority >= 0) {
+                _process = new Process(settings.processPriority);
+            }
             refreshSettings(settings);
         }
 
@@ -78,7 +80,7 @@ package enixan.battleSystemCore {
         public function start():void {}
 
         /**
-         * Must take the settings and refresh *(change)* logic of **Component** with them
+         * Take the settings and refresh *(change)* logic of **Component** with them
          * *You should override this function for use*
          * @param settings Values that allows to customise component logic
          * */

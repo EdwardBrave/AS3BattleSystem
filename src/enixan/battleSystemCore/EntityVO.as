@@ -25,8 +25,8 @@ package enixan.battleSystemCore {
             if (!(_data.className is String)) {
                 throw new Error("CoreError #1034: Type Coercion failed: cannot convert value of data.className to String", 1034);
             }
-            if (!(_data.behaviourClassName == null || _data.behaviourClassName is String)) {
-                throw new Error("CoreError #1034: Type Coercion failed: cannot convert value of data.behaviourClassName to String", 1034);
+            if (!(_data.behaviourVO == null || _data.behaviourVO is BehaviourVO)) {
+                throw new Error("CoreError #1034: Type Coercion failed: cannot convert value of data.behaviourVO to BehaviourVO", 1034);
             }
             if (!(_data.children == null || _data.children is Vector.<EntityVO>)) {
                 throw new Error("CoreError #1034: Type Coercion failed: cannot convert value of data.children to Vector.<EntityVO>", 1034);
@@ -39,9 +39,9 @@ package enixan.battleSystemCore {
             return _data.className;
         }
 
-        /**The name of **BehaviourManager** class of the entity prototype*/
-        public function get behaviourClassName():String {
-            return _data.behaviourClassName;
+        /**The view object of **BehaviourManager** class of the entity prototype*/
+        public function get behaviourVO():BehaviourVO {
+            return _data.behaviourVO;
         }
 
         /**The settings that will be applied when will be created an exemplar of current entity prototype*/
