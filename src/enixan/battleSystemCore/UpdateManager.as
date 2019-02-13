@@ -1,11 +1,11 @@
 package enixan.battleSystemCore{
     import com.greensock.TweenLite;
     import flash.system.System;
-
-import hlp.List;
+    import hlp.List;
 
     /**
      * Global static class that control`s updates and manage active processes in game session
+     * @author EdwardBrave
      * */
     public class UpdateManager { 
 

@@ -24,6 +24,7 @@ package enixan.battleSystemCore {
      * handlers names: *repeater, inverter, successor*
      * **Leaf**      - It doesnt have a sub notes but only this node can contain an executing functionality.
      * handlers names: *leaf*
+     * @author EdwardBrave
      * */
     public class BehaviourTree implements IBehaviourManager {
 
@@ -180,7 +181,7 @@ package enixan.battleSystemCore {
             iterationsCounter++;
             var status:String = node(tree);
             if (status == NodeStatusEvent.STATUS_FAILURE || status == NodeStatusEvent.STATUS_UNDEFINED) {
-                trace("#>>enixan.battleSystemCore.BehaviourTree::rootTreeUpdate:181");
+                trace("#>>enixan.battleSystemCore.BehaviourTree::rootTreeUpdate");
                 trace("#>>BTWarning! Behaviour is undefined (STATUS_FAILURE or STATUS_UNDEFINED)!");
             }
         }
@@ -196,7 +197,7 @@ package enixan.battleSystemCore {
                 data.iteration = iterationsCounter;
             }
             if (data.status == NodeStatusEvent.STATUS_UNDEFINED) {
-                trace("#>>enixan.battleSystemCore.BehaviourTree::node:191");
+                trace("#>>enixan.battleSystemCore.BehaviourTree::node");
                 trace("#>>BTError! Node does not give an answer on event (STATUS_UNDEFINED)!");
             }
             return data.status;

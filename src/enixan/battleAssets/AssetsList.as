@@ -5,7 +5,10 @@ import enixan.battleSystemCore.Component;
 
     import flash.utils.getDefinitionByName;
 
-    /**The list of entities, components and behaviour that can be added to the battle logic*/
+    /**
+     * The list of entities, components and behaviour that can be added to the battle logic
+     * @author EdwardBrave
+     * */
     public class AssetsList {
 
         /**
@@ -26,7 +29,7 @@ import enixan.battleSystemCore.Component;
                 }
             }
             catch (err:Error){
-                trace("#>>enixan.battleAssets.AssetsList::getClassByName:25");
+                trace("#>>enixan.battleAssets.AssetsList::getClassByName");
                 trace("#>>AssetsError! Class of the given name \""+className+"\" not found.");
             }
             return null;

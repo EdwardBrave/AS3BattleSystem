@@ -1,6 +1,9 @@
 package enixan.battleSystemCore {
 
-    /**.**View Object** of BTNodeVO prototype that using in **BehaviourTree** logic*/
+    /**
+     * .**View Object** of BTNodeVO prototype that using in **BehaviourTree** logic
+     * @author EdwardBrave
+     * */
     public class BTNodeVO {
 
         /**Pointer on data object of current **EntityVO***/

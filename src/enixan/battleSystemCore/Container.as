@@ -3,6 +3,7 @@ package enixan.battleSystemCore {
 
     /**
      * Contains, manage and store logical components of entity
+     * @author EdwardBrave
      * */
     public class Container extends Sprite {
 

@@ -1,5 +1,8 @@
 package enixan.battleSystemCore {
-    /**.**View Object** of entity prototype that using in component creation*/
+    /**
+     * .**View Object** of entity prototype that using in component creation
+     * @author EdwardBrave
+     * */
     public class BehaviourVO {
 
         /**Pointer on data object of current **EntityVO***/

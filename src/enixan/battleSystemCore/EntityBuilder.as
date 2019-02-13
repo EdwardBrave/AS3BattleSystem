@@ -1,7 +1,10 @@
 package enixan.battleSystemCore {
     import enixan.battleAssets.AssetsList;
 
-    /**This class construct and manage entities that can be used in battle system core (ECS)*/
+    /**
+     * This class construct and manage entities that can be used in battle system core (ECS)
+     * @author EdwardBrave
+     * */
     public class EntityBuilder {
 
         /**

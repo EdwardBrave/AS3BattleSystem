@@ -2,6 +2,7 @@ package enixan.battleSystemCore {
 
     /**
      * Interface for BehaviourManager manager, that must to control components activity in its environment
+     * @author EdwardBrave
      * */
     public interface IBehaviourManager {
 

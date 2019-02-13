@@ -3,6 +3,7 @@ package enixan.battleSystemCore {
     /**
      * It has an information about current process: its length, state, progress, connected component... ,
      * react on events and start reactions in component
+     * @author EdwardBrave
      * */
     public class Process {
 

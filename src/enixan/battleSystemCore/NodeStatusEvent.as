@@ -3,6 +3,7 @@ package enixan.battleSystemCore {
     /**
      * Class store a *status* of current event that can be used after dispatch
      * This functionality using in the **Behaviour Tree** pattern
+     * @author EdwardBrave
      * */
     public class NodeStatusEvent extends ObjDataEvent{
 

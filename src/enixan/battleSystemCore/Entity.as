@@ -2,6 +2,7 @@ package enixan.battleSystemCore {
 
     /**
     * This class manage communication between their components and state machine. It is an environment for their correct work
+     * @author EdwardBrave
     * */
     public class Entity extends Container implements IComponent {
 

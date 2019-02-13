@@ -3,6 +3,7 @@ package enixan.battleSystemCore {
 
     /**
      * Class store a *data* of current event that can be dispatch to others
+     * @author EdwardBrave
      * */
     public class ObjDataEvent extends Event {
 

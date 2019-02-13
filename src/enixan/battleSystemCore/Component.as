@@ -3,6 +3,7 @@ package enixan.battleSystemCore {
 
     /**
      *  Base class of logic that is contain only one behaviour
+     *  @author EdwardBrave
      * */
     public class Component implements IComponent {
 
